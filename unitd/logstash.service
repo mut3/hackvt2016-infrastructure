@@ -1,0 +1,15 @@
+[Service]
+Requires=elastic.service
+
+[Unit]
+ExecStartPre=-/usr/bin/docker kill 'hack-logstash'
+ExecStartPre=-/usr/bin/docker rm 'hack-logstash'
+ExecStart=/usr/bin/docker run \
+  --net=bridge \
+  --name='hack-logstash' \
+  --volume=/logstash.config:/settings:rw \
+  --link=elastic-hack:elastic-hack
+  mywebgrocer/logstash
+  -f /settings/conf.d
+ExecStopPost=-/usr/bin/docker kill 'hack-logstash'
+ExecStopPost=-/usr/bin/docker rm 'hack-logstash'
