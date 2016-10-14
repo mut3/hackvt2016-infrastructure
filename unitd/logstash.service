@@ -1,7 +1,7 @@
-[Service]
+[Unit]
 Requires=elastic.service
 
-[Unit]
+[Service]
 ExecStartPre=-/usr/bin/docker kill 'hack-logstash'
 ExecStartPre=-/usr/bin/docker rm 'hack-logstash'
 ExecStart=/usr/bin/docker run \

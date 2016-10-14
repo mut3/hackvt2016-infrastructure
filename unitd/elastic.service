@@ -1,7 +1,7 @@
-[Service]
+[Unit]
 Requires=docker.service
 
-[Unit]
+[Service]
 ExecStartPre=-/usr/bin/docker kill 'hack-elastic'
 ExecStartPre=-/usr/bin/docker rm 'hack-elastic'
 ExecStart=/usr/bin/docker run \
